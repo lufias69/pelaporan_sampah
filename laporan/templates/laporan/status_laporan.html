@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Status Laporan</title>
+</head>
+<body>
+    <h2>Status Laporan</h2>
+    <ul>
+        {% for laporan in laporan_list %}
+            <li>{{ laporan.judul }} - Status: {{ laporan.status }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

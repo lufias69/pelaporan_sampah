@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Petugas</title>
+</head>
+<body>
+    <h2>Dashboard Petugas Pengelola Sampah</h2>
+    <ul>
+        {% for laporan in laporan_list %}
+            <li>{{ laporan.judul }} - Status: {{ laporan.status }}
+                <a href="{% url 'tanggapi_laporan' laporan.id %}">Tangani</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

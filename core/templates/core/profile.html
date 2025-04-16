@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+    <!-- Tombol Logout di bagian atas halaman -->
+    <form method="POST" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+
+    <h2>Welcome, {{ user.username }}</h2>
+
+    <!-- Menampilkan Foto Profil jika ada -->
+    <p><strong>Foto Profil:</strong></p>
+    {% if user.profile.foto %}
+        <img src="{{ user.profile.foto.url }}" alt="Profile Photo" width="100">
+    {% else %}
+        <p>No profile photo uploaded.</p>
+    {% endif %}
+    <p><strong>Alamat:</strong> {{ user.profile.alamat }}</p>
+
+    <!-- Menampilkan Daftar Laporan yang Sudah Diajukan oleh Pengguna -->
+    <h3>Laporan Anda</h3>
+    <ul>
+        {% for laporan in laporan_list %}
+            <li>{{ laporan.judul }} - Status: {{ laporan.status }} ({{ laporan.tanggal_laporan }})</li>
+        {% empty %}
+            <li>No reports submitted yet.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Formulir untuk melaporkan masalah baru -->
+    <h3>Melaporkan Masalah Baru</h3>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Kirim Laporan</button>
+    </form>
+</body>
+</html>
